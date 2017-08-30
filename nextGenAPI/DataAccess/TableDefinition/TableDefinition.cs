@@ -4,6 +4,17 @@ namespace nextGenAPI.DataAccess.TableDefinition {
     public class TableDefinition {
         public int TableId {get; set;}
         public String TableName {get; set;}          
+        public TableDefinition( int tableId, String tableName) {
+
+            this.TableId = tableId;
+            this.TableName = tableName;
+        }
+
+    }
+
+    public class TableColumnDefinition {
+        public int TableId { get; set; }
+        public String TableName { get; set; }
         public int ColumnId { get; set; }
         public String ColumnName { get; set; }
         public String ColumnDescription { get; set; }
@@ -12,6 +23,7 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         public String ColumnClientDataType { get; set; }
         public int? ColumnLength { get; set; }
         public int? ColumnDecimalPlaces { get; set; }
+        public Boolean ColumnNullable { get; set; }
         public String ColumnSQLName { get; set; }
         public String ColumnAPIName { get; set; }
         public String ColumnClientName { get; set; }
@@ -20,11 +32,10 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         public string ModifiedBy { get; set; }
         public string ModifiedDate { get; set; }
 
-
-        public TableDefinition(
+        public TableColumnDefinition(
             int tableId, String tableName, int columnId, String columnName, String columnDescription,
             String columnSQLDataType, String columnAPIDataType, String columnClientDataType,
-            int? columnLength, int? columnDecimalPlaces, String columnSQLName, String columnAPIName, String columnClientName,
+            int? columnLength, int? columnDecimalPlaces, Boolean ColumnNullable, String columnSQLName, String columnAPIName, String columnClientName,
             string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate) {
 
             this.TableId = tableId;
@@ -37,6 +48,7 @@ namespace nextGenAPI.DataAccess.TableDefinition {
             this.ColumnClientDataType = columnClientDataType;
             this.ColumnLength = columnLength;
             this.ColumnDecimalPlaces = columnDecimalPlaces;
+            this.ColumnNullable = ColumnNullable;
             this.ColumnSQLName = columnSQLName;
             this.ColumnAPIName = columnAPIName;
             this.ColumnClientName = columnClientName;
@@ -47,6 +59,5 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         }
 
     }
-
 
 }

@@ -183,7 +183,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="CodeGeneration\CodeGenerator.cs" />
+    <Compile Include="CodeGeneration\Helpers.cs" />
     <Compile Include="Controllers\CodeController.cs" />
+    <Compile Include="Controllers\GenerateCodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TableDefinitionController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
@@ -193,6 +196,9 @@
     <Compile Include="DataAccess\Code\DataAccess\CodeCommandFactory.cs" />
     <Compile Include="DataAccess\Common\Helpers.cs" />
     <Compile Include="DataAccess\Common\RepositoryBase.cs" />
+    <Compile Include="DataAccess\GenerateCode\DataAccess\GenerateCodeCommandFactory.cs" />
+    <Compile Include="DataAccess\GenerateCode\GenerateCodeRepository.cs" />
+    <Compile Include="DataAccess\GenerateCode\Scratch.cs" />
     <Compile Include="DataAccess\TableDefinition\TableDefinition.cs" />
     <Compile Include="DataAccess\TableDefinition\DataAccess\TableDefinitionCommandFactory.cs" />
     <Compile Include="DataAccess\TableDefinition\TableDefinitionRepository.cs" />

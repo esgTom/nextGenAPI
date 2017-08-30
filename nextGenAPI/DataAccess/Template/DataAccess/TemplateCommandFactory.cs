@@ -6,8 +6,10 @@ namespace nextGenAPI.DataAccess.Template.DataAccess {
         internal SqlCommand GetTemplates(SqlConnection connection) {
 
             var queryString = @"
-                SELECT	Template_Category, 
-		            Template_Name, 
+                SELECT	Template_Category,
+                    Template_Id,
+		            Template_Name,
+                    Template_Category
 		            Template_Text, 
 		            Created_By, 
 		            Created_Date, 
