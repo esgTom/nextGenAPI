@@ -51,6 +51,7 @@ namespace nextGenAPI.DataAccess.TableDefinition {
                                 var columntableId = (int)(reader["Table_Id"]);
                                 var tableName = (String)(reader["Table_Name"]);
                                 var columnId = (int)(reader["Column_Id"]);
+                                var columnPrimaryKey = (Byte)(reader["Column_Primary_Key"]) == 1 ? true : false;
                                 var columnName = (String)(reader["Column_Name"]);
                                 var columnDescription = (String)(reader["Column_Description"]);
                                 var columnSQLDataType = (String)(reader["Column_SQL_Data_Type"]);
@@ -62,16 +63,17 @@ namespace nextGenAPI.DataAccess.TableDefinition {
                                 var columnSQLName = (String)(reader["Column_SQL_Name"]);
                                 var columnAPIName = (String)(reader["Column_API_Name"]);
                                 var columnClientName = (String)(reader["Column_Client_Name"]);
+                                var columnOrdinalPosition = (int)(reader["Column_Ordinal_Position"]);
                                 var createdBy = (String)(reader["Created_By"] == DBNull.Value ? "" : reader["Created_By"]);
                                 var createdDate = (DateTime)(reader["Created_Date"]);
                                 var modifiedBy = (String)(reader["Modified_By"] == DBNull.Value ? "" : reader["Modified_By"]);
                                 var modifiedDate = (DateTime)(reader["Modified_Date"]);
 
                                 tableColumns.Add(new TableColumnDefinition(
-                                        columntableId, tableName, columnId, columnName, columnDescription,
+                                        columntableId, tableName, columnId, columnPrimaryKey, columnName, columnDescription,
                                         columnSQLDataType, columnAPIDataType, columnClientDataType,
                                         columnLength, columnDecimalPlaces, columnNullable,
-                                        columnSQLName, columnAPIName, columnClientName,
+                                        columnSQLName, columnAPIName, columnClientName, columnOrdinalPosition,
                                         createdBy, createdDate, modifiedBy, modifiedDate));
                             }
 
