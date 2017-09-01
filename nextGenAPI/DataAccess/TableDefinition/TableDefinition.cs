@@ -27,20 +27,24 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         public String ColumnSQLName { get; set; }
         public String ColumnAPIName { get; set; }
         public String ColumnClientName { get; set; }
+        public bool ColumnPrimaryKey { get; set; }
+        public int ColumnOrdinalPosition { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public string ModifiedDate { get; set; }
 
         public TableColumnDefinition(
-            int tableId, String tableName, int columnId, String columnName, String columnDescription,
+            int tableId, String tableName, int columnId, bool ColumnPrimaryKey, String columnName, String columnDescription,
             String columnSQLDataType, String columnAPIDataType, String columnClientDataType,
-            int? columnLength, int? columnDecimalPlaces, Boolean ColumnNullable, String columnSQLName, String columnAPIName, String columnClientName,
+            int? columnLength, int? columnDecimalPlaces, Boolean ColumnNullable, 
+            String columnSQLName, String columnAPIName, String columnClientName, int ColumnOrdinalPosition,
             string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate) {
 
             this.TableId = tableId;
             this.TableName = tableName;
             this.ColumnId = columnId;
+            this.ColumnPrimaryKey = ColumnPrimaryKey;
             this.ColumnName = columnName;
             this.ColumnDescription = columnDescription;
             this.ColumnSQLDataType = columnSQLDataType;
@@ -52,6 +56,7 @@ namespace nextGenAPI.DataAccess.TableDefinition {
             this.ColumnSQLName = columnSQLName;
             this.ColumnAPIName = columnAPIName;
             this.ColumnClientName = columnClientName;
+            this.ColumnOrdinalPosition = ColumnOrdinalPosition;
             this.CreatedBy = createdBy;
             this.CreatedDate = createdDate.ToShortDateString();
             this.ModifiedBy = modifiedBy;
