@@ -27,10 +27,6 @@ namespace nextGenAPI.CodeGeneration {
                     generatedCode = GenerateAPIModel();
                     break;
 
-                case "Client-Model":
-                    generatedCode = GenerateClientModel();
-                    break;
-
                 case "API-Controller":
                     generatedCode = GenerateAPIController();
                     break;
@@ -42,6 +38,10 @@ namespace nextGenAPI.CodeGeneration {
 
                 case "API-CommandFactory":
                     generatedCode = GenerateAPICommandFactory();
+                    break;
+
+                case "Client-Model":
+                    generatedCode = GenerateClientModel();
                     break;
 
                 default:

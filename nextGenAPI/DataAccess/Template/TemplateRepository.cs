@@ -22,9 +22,9 @@ namespace nextGenAPI.DataAccess.Template {
                         try {
                             while (reader.Read()) {
 
-                                var templateId = (int)(reader["template_Id"]);
-                                var templateCategory = (string)(reader["template_Category"]);
-                                var templateName = (string)(reader["template_Name"]);
+                                var templateId = (int)(reader["Template_Id"]);
+                                var templateCategory = (string)(reader["Template_Category"]);
+                                var templateName = (string)(reader["Template_Name"]);
                                 var createdBy = (String)(reader["Created_By"] == DBNull.Value ? "" : reader["Created_By"]);
                                 var createdDate = (DateTime)(reader["Created_Date"]);
                                 var modifiedBy = (String)(reader["Modified_By"] == DBNull.Value ? "" : reader["Modified_By"]);
