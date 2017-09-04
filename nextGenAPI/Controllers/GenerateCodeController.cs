@@ -14,6 +14,7 @@ namespace nextGenAPI.Controllers {
             var generatedCode = repo.GetGeneratedCode(selectedTemplateName, selectedTableId);
 
             if (generatedCode != null) {
+
                 return Ok(generatedCode);
             } else {
                 return NotFound();

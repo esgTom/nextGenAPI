@@ -9,8 +9,6 @@ namespace nextGenAPI.DataAccess.Template.DataAccess {
                 SELECT	Template_Category,
                     Template_Id,
 		            Template_Name,
-                    Template_Category
-		            Template_Text, 
 		            Created_By, 
 		            Created_Date, 
 		            Modified_By, 

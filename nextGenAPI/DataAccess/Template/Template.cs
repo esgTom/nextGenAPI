@@ -5,6 +5,7 @@ namespace nextGenAPI.DataAccess.Template {
         public int TemplateId { get; set; }
         public string TemplateCategory { get; set; }
         public string TemplateName { get; set; }
+        public string TemplateNameCategory { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
@@ -14,6 +15,7 @@ namespace nextGenAPI.DataAccess.Template {
             this.TemplateId = templateId;
             this.TemplateCategory = templateCategory;
             this.TemplateName = templateName;
+            this.TemplateNameCategory = string.Format($"{templateCategory.Trim()}-{templateName.Trim()}");
             this.CreatedBy = createdBy;
             this.CreatedDate = createdDate.ToShortDateString();
             this.ModifiedBy = modifiedBy;

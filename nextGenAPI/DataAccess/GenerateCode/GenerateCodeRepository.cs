@@ -5,13 +5,16 @@ using nextGenAPI.CodeGeneration;
 namespace nextGenAPI.DataAccess.GenerateCode {
     public class GenerateCodeRepository : RepositoryBase {
 
-        public String GetGeneratedCode(string selectedTemplateName, int selectedTableId) {
+        public GeneratedCode GetGeneratedCode(string selectedTemplateName, int selectedTableId) {
             
             String generatedCode = string.Empty;
             var codeGenerator = new CodeGenerator();
             generatedCode = codeGenerator.GetCode(selectedTemplateName, selectedTableId);
-                        
-            return generatedCode;
+
+            var generatedCodeClass = new GeneratedCode();
+            generatedCodeClass.Code = generatedCode;
+
+            return generatedCodeClass;
         }
     }
 }
