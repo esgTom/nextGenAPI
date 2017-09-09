@@ -19,9 +19,10 @@ namespace nextGenAPI.DataAccess.TableDefinition {
 
                         try {
                             while (reader.Read()) {
+                                var projectId = (int)(reader["Project_Id"]);
                                 var tableId = (int)(reader["Table_Id"]);
                                 var tableName = (String)(reader["Table_Name"]);
-                                tables.Add(new TableDefinition(tableId, tableName));
+                                tables.Add(new TableDefinition(projectId, tableId, tableName));
                             }
 
                         } finally {
@@ -48,7 +49,8 @@ namespace nextGenAPI.DataAccess.TableDefinition {
                         try {
                             while (reader.Read()) {
 
-                                var columntableId = (int)(reader["Table_Id"]);
+                                var columnProjectId = (int)(reader["Project_Id"]);
+                                var columnTableId = (int)(reader["Table_Id"]);
                                 var tableName = (String)(reader["Table_Name"]);
                                 var columnId = (int)(reader["Column_Id"]);
                                 var columnPrimaryKey = (Byte)(reader["Column_Primary_Key"]) == 1 ? true : false;
@@ -70,7 +72,7 @@ namespace nextGenAPI.DataAccess.TableDefinition {
                                 var modifiedDate = (DateTime)(reader["Modified_Date"]);
 
                                 tableColumns.Add(new TableColumnDefinition(
-                                        columntableId, tableName, columnId, columnPrimaryKey, columnName, columnDescription,
+                                        columnProjectId, columnTableId, tableName, columnId, columnPrimaryKey, columnName, columnDescription,
                                         columnSQLDataType, columnAPIDataType, columnClientDataType,
                                         columnLength, columnDecimalPlaces, columnNullable,
                                         columnSQLName, columnAPIName, columnClientName, columnOrdinalPosition,

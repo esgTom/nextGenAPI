@@ -29,7 +29,7 @@ namespace nextGenAPI.DataAccess.Import {
 
 
                     tableColumns.Add(new TableColumnDefinition(
-                        0, columnDef.TableName, 0, columnDef.ColumnPrimaryKey, columnDef.ColumnName, "", columnDef.ColumnDataType, columnAPIDataType, columnClientDataType,
+                        columnDef.ProjectId, 0, columnDef.TableName, 0, columnDef.ColumnPrimaryKey, columnDef.ColumnName, "", columnDef.ColumnDataType, columnAPIDataType, columnClientDataType,
                         columnDef.ColumnLength, columnDef.ColumnDecimalPlaces, columnDef.ColumnNullable,
                         columnDef.ColumnName, columnAPIName, columnClientName, columnDef.ColumnOrdinalPosition,
                         "Import", DateTime.Now, "Import", DateTime.Now));
@@ -37,10 +37,11 @@ namespace nextGenAPI.DataAccess.Import {
 
             }
 
-            var incomingTables = tableColumns.GroupBy(t => t.TableName).Select(group => new ImportTableInfo{
-                    TableName = group.First().TableName,
-                    TableId = 0
-                }).ToList();
+            var incomingTables = tableColumns.GroupBy(t => t.TableName).Select(group => new ImportTableInfo {
+                ProjectId = group.First().ProjectId,
+                TableName = group.First().TableName,
+                TableId = 0
+            }).ToList();
 
 
             using (var connection = new SqlConnection(ConnectionString)) {
@@ -62,6 +63,7 @@ namespace nextGenAPI.DataAccess.Import {
                         // Inserts new Table definitions
 
                         foreach (ImportTableInfo tableInfo in incomingTables) {
+                            command.Parameters["@projectId"].Value = tableInfo.ProjectId;
                             command.Parameters["@tableName"].Value = tableInfo.TableName;
                             command.Parameters["@CreatedBy"].Value = "Import";
                             command.Parameters["@ModifiedBy"].Value = "Import";
@@ -77,7 +79,7 @@ namespace nextGenAPI.DataAccess.Import {
                         foreach (TableColumnDefinition table in tableColumns) {
 
                             tableId = incomingTables.Where(t => t.TableName == table.TableName).Select(t => t.TableId).SingleOrDefault();
-                            
+
                             command.Parameters["@tableId"].Value = tableId;
                             command.Parameters["@ColumnPrimaryKey"].Value = table.ColumnPrimaryKey == false ? 0 : 1;
                             command.Parameters["@ColumnName"].Value = table.ColumnName;
@@ -94,7 +96,7 @@ namespace nextGenAPI.DataAccess.Import {
                             command.Parameters["@ColumnOrdinalPosition"].Value = table.ColumnOrdinalPosition;
                             command.Parameters["@CreatedBy"].Value = "Import";
                             command.Parameters["@ModifiedBy"].Value = "Import";
-                                                        
+
                             command.ExecuteNonQuery();
 
                         }
