@@ -186,6 +186,10 @@
     <Compile Include="CodeGeneration\CodeGenerator.cs" />
     <Compile Include="CodeGeneration\Helpers.cs" />
     <Compile Include="Controllers\CodeController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="DataAccess\Project\DataAccess\ProjectCommandFactory.cs" />
+    <Compile Include="DataAccess\Project\Project.cs" />
+    <Compile Include="DataAccess\Project\ProjectRepository.cs" />
     <Compile Include="DataAccess\GenerateCode\GeneratedCode.cs" />
     <Compile Include="DataAccess\Import\DataAccess\ImportCommandFactory.cs" />
     <Compile Include="DataAccess\Import\ImportRepository.cs" />

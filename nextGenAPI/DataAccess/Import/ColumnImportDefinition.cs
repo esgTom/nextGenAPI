@@ -2,7 +2,7 @@
 
 namespace nextGenAPI.DataAccess.Import {
     public class ColumnImportDefinition {
-
+        public int ProjectId { get; set; }
         public String TableName { get; set; }
         public String ColumnName { get; set; }
         public String ColumnDataType { get; set; }

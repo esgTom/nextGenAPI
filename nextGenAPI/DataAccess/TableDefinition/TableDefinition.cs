@@ -2,17 +2,18 @@
 
 namespace nextGenAPI.DataAccess.TableDefinition {
     public class TableDefinition {
-        public int TableId {get; set;}
-        public String TableName {get; set;}          
-        public TableDefinition( int tableId, String tableName) {
-
+        public int ProjectId { get; set; }
+        public int TableId { get; set; }
+        public String TableName { get; set; }
+        public TableDefinition(int projectId, int tableId, String tableName) {
+            this.ProjectId = ProjectId;
             this.TableId = tableId;
             this.TableName = tableName;
         }
-
     }
 
     public class TableColumnDefinition {
+        public int ProjectId { get; set; }
         public int TableId { get; set; }
         public String TableName { get; set; }
         public int ColumnId { get; set; }
@@ -35,12 +36,13 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         public string ModifiedDate { get; set; }
 
         public TableColumnDefinition(
-            int tableId, String tableName, int columnId, bool ColumnPrimaryKey, String columnName, String columnDescription,
+            int projectId, int tableId, String tableName, int columnId, bool ColumnPrimaryKey, String columnName, String columnDescription,
             String columnSQLDataType, String columnAPIDataType, String columnClientDataType,
-            int? columnLength, int? columnDecimalPlaces, Boolean ColumnNullable, 
+            int? columnLength, int? columnDecimalPlaces, Boolean ColumnNullable,
             String columnSQLName, String columnAPIName, String columnClientName, int ColumnOrdinalPosition,
             string createdBy, DateTime createdDate, string modifiedBy, DateTime modifiedDate) {
 
+            this.ProjectId = projectId;
             this.TableId = tableId;
             this.TableName = tableName;
             this.ColumnId = columnId;
@@ -64,5 +66,4 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         }
 
     }
-
 }

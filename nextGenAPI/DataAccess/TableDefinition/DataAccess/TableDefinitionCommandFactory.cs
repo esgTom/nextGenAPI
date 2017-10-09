@@ -8,7 +8,8 @@ namespace nextGenAPI.DataAccess.TableDefinition {
         internal SqlCommand GetTableDefinition(SqlConnection connection) {
 
             var queryString = @"
-                SELECT  Table_Id, 
+                SELECT  Project_Id,
+                        Table_Id, 
                         Table_Name,                        
                         Created_By, 
                         Created_Date, 
@@ -25,7 +26,8 @@ namespace nextGenAPI.DataAccess.TableDefinition {
          internal SqlCommand GetTableColumnDefinition(SqlConnection connection, int tableId) {
 
             var queryString = @"
-                    SELECT  t.Table_Id, 
+                    SELECT  t.Project_Id,
+                            t.Table_Id, 
                             Table_Name,
                             Column_Id,
                             Column_Primary_Key,

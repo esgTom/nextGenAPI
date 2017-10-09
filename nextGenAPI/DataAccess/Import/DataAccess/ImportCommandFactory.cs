@@ -25,7 +25,7 @@ namespace nextGenAPI.DataAccess.Import {
             };
 
             cmd.Parameters.Add("@tableName", SqlDbType.VarChar);
-            
+
 
             return cmd;
 
@@ -36,8 +36,8 @@ namespace nextGenAPI.DataAccess.Import {
             var queryString = @"
                     SET NOCOUNT ON;
 
-                    INSERT INTO Table_Definition(Table_Name, Created_By, Modified_By)
-                        VALUES ( @TableName, @CreatedBy, @ModifiedBy )
+                    INSERT INTO Table_Definition(Project_Id, Table_Name, Created_By, Modified_By)
+                        VALUES ( @projectId, @tableName, @createdBy, @modifiedBy )
 
                     SELECT @pkValue = @@IDENTITY;
                 ";
@@ -46,13 +46,14 @@ namespace nextGenAPI.DataAccess.Import {
                 Transaction = transaction
             };
 
-            cmd.Parameters.Add("@TableName", SqlDbType.VarChar);
-            cmd.Parameters.Add("@CreatedBy", SqlDbType.VarChar);
-            cmd.Parameters.Add("@ModifiedBy", SqlDbType.VarChar);
+            cmd.Parameters.Add("@projectId", SqlDbType.Int);
+            cmd.Parameters.Add("@tableName", SqlDbType.VarChar);
+            cmd.Parameters.Add("@createdBy", SqlDbType.VarChar);
+            cmd.Parameters.Add("@modifiedBy", SqlDbType.VarChar);
 
             cmd.Parameters.Add(new SqlParameter("@pkValue", SqlDbType.Int) {
-                    Direction = ParameterDirection.Output
-                });
+                Direction = ParameterDirection.Output
+            });
 
             return cmd;
 
@@ -83,7 +84,7 @@ namespace nextGenAPI.DataAccess.Import {
             var cmd = new SqlCommand(Common.Helpers.CleanSQLText(queryString), connection) {
                 Transaction = transaction
             };
-            
+
 
             cmd.Parameters.Add("@TableId", SqlDbType.Int);
             cmd.Parameters.Add("@ColumnPrimaryKey", SqlDbType.TinyInt);
