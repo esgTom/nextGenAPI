@@ -185,8 +185,13 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="CodeGeneration\CodeGenerator.cs" />
     <Compile Include="CodeGeneration\Helpers.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Controllers\CodeController.cs" />
+    <Compile Include="Controllers\ColumnController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="DataAccess\Column\ColumnDefinition.cs" />
+    <Compile Include="DataAccess\Column\ColumnRepository.cs" />
+    <Compile Include="DataAccess\Column\DataAccess\ColumnCommandFactory.cs" />
     <Compile Include="DataAccess\Project\DataAccess\ProjectCommandFactory.cs" />
     <Compile Include="DataAccess\Project\Project.cs" />
     <Compile Include="DataAccess\Project\ProjectRepository.cs" />

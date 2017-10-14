@@ -1,4 +1,5 @@
-﻿using nextGenAPI.DataAccess.TableDefinition;
+﻿using nextGenAPI.Common;
+using nextGenAPI.DataAccess.TableDefinition;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -70,8 +71,18 @@ namespace nextGenAPI.CodeGeneration {
                 template.Append(Helpers.APIModelProperty(column) + Environment.NewLine);
             }
 
+            // API Model Constructor
+            template.Append("public " + this.tableName + "( ");
+            
+            template.Append(Helpers.APIParameterDefinitionList(tableColumns) + " ) {" + Environment.NewLine);
+            template.Append(Helpers.APIParameterPropertyAssignmentList(tableColumns, Constants.addingNewLine) + " ) {" + Environment.NewLine);
+            template.Append("}" + Environment.NewLine);
+
+
+
             template.Append("}" + Environment.NewLine);
             template.Append("}" + Environment.NewLine);
+
 
             return template.ToString();
         }
@@ -97,6 +108,10 @@ namespace nextGenAPI.CodeGeneration {
 
             template.Append("using System.Web.Http;" + Environment.NewLine);
             template.Append(Environment.NewLine + Environment.NewLine);
+            template.Append(Environment.NewLine + Environment.NewLine);
+
+            template.Append("namespace { nextGenAPI.Controllers ");
+            
             template.Append("public class " + this.tableName + "Controller : ApiController {" + Environment.NewLine + Environment.NewLine);
 
             // Get
@@ -115,7 +130,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("[HttpPost]" + Environment.NewLine);
             template.Append("public IHttpActionResult Update" + this.tableName + "(" + this.tableName + " " + Helpers.FirstCharacterToLower(this.tableName) + ") {" + Environment.NewLine + Environment.NewLine);
             template.Append("var repo = new " + this.tableName + "Repository();" + Environment.NewLine);
-            template.Append("var response = repo.Get" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
+            template.Append("var response = repo.insert" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
             template.Append("if (response != null) {" + Environment.NewLine);
             template.Append("return Ok(response);" + Environment.NewLine);
             template.Append("} else {" + Environment.NewLine);
@@ -128,7 +143,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("[HttpPut]" + Environment.NewLine);
             template.Append("public IHttpActionResult Insert" + this.tableName + "(" + this.tableName + " " + Helpers.FirstCharacterToLower(this.tableName) + ") {" + Environment.NewLine + Environment.NewLine);
             template.Append("var repo = new " + this.tableName + "Repository();" + Environment.NewLine);
-            template.Append("var response = repo.Get" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
+            template.Append("var response = repo.Update" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
             template.Append("if (response != null) {" + Environment.NewLine);
             template.Append("return Ok(response);" + Environment.NewLine);
             template.Append("} else {" + Environment.NewLine);
@@ -140,7 +155,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("[HttpDelete]" + Environment.NewLine);
             template.Append("public IHttpActionResult Delete" + this.tableName + "(" + this.tableName + " " + Helpers.FirstCharacterToLower(this.tableName) + ") {" + Environment.NewLine + Environment.NewLine);
             template.Append("var repo = new " + this.tableName + "Repository();" + Environment.NewLine);
-            template.Append("var response = repo.Get" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
+            template.Append("var response = repo.Delete" + this.tableName + "(" + Helpers.FirstCharacterToLower(this.tableName) + ");" + Environment.NewLine);
             template.Append("if (response != null) {" + Environment.NewLine);
             template.Append("return Ok(response);" + Environment.NewLine);
             template.Append("} else {" + Environment.NewLine);
@@ -149,7 +164,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("}" + Environment.NewLine);
 
 
-
+            template.Append("}" + Environment.NewLine);
             template.Append("}" + Environment.NewLine);
 
             return template.ToString();
@@ -166,7 +181,7 @@ namespace nextGenAPI.CodeGeneration {
 
             template.Append("namespace nextGenAPI.DataAccess." + this.tableName + " {" + Environment.NewLine);
 
-            template.Append("internal class " + this.tableName + " : RepositoryBase {" + Environment.NewLine);
+            template.Append("internal class " + this.tableName + "Repository : RepositoryBase {" + Environment.NewLine);
 
             // Select
             template.Append("public List<" + this.tableName + "> Get" + this.tableName + "() {" + Environment.NewLine + Environment.NewLine);

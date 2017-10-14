@@ -46,7 +46,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("using (var command = cmd.Insert" + tableName + "(connection)) {" + Environment.NewLine + Environment.NewLine);
 
             foreach (var column in tableColumns) {
-                template.Append($"cmd.Parameters[\"{ GetAPISQLParameterName(column.ColumnAPIName)}\"].Value = { Helpers.FirstCharacterToLower(tableName) }.{ column.ColumnAPIName };" + Environment.NewLine);
+                template.Append($"command.Parameters[\"{ GetAPISQLParameterName(column.ColumnAPIName)}\"].Value = { Helpers.FirstCharacterToLower(tableName) }.{ column.ColumnAPIName };" + Environment.NewLine);
             }
 
             template.Append(Environment.NewLine + "try {" + Environment.NewLine);
@@ -71,7 +71,7 @@ namespace nextGenAPI.CodeGeneration {
             template.Append("using (var command = cmd.Update" + tableName + "(connection)) {" + Environment.NewLine + Environment.NewLine);
 
             foreach (var column in tableColumns) {
-                template.Append($"cmd.Parameters[\"{ GetAPISQLParameterName(column.ColumnAPIName)}\"].Value = { Helpers.FirstCharacterToLower(tableName) }.{ column.ColumnAPIName };" + Environment.NewLine);
+                template.Append($"command.Parameters[\"{ GetAPISQLParameterName(column.ColumnAPIName)}\"].Value = { Helpers.FirstCharacterToLower(tableName) }.{ column.ColumnAPIName };" + Environment.NewLine);
             }
 
             template.Append(Environment.NewLine + "try {" + Environment.NewLine);
@@ -174,21 +174,38 @@ namespace nextGenAPI.CodeGeneration {
 
              
         public static String APIParameterList(List<TableColumnDefinition> tableColumns) {
-            // Returns a comma-seperated list of API column names
+            // Returns a comma-seperated list of API column names - ex: projectId, projectName,
+            return string.Join(",", tableColumns.Select( c => FirstCharacterToLower(c.ColumnAPIName)).ToList());
 
-            var template = new StringBuilder();
-            var itemCount = tableColumns.Count;
+            //var template = new StringBuilder();
+            //var itemCount = tableColumns.Count;
 
-            foreach (var column in tableColumns) {
-                itemCount--;
-                if (itemCount > 0) {
-                    template.Append($"{FirstCharacterToLower(column.ColumnAPIName)}, ");
-                } else {
-                    template.Append(FirstCharacterToLower(column.ColumnAPIName));
-                }
-            }
-            return template.ToString();
+            //foreach (var column in tableColumns) {
+            //    itemCount--;
+            //    if (itemCount > 0) {
+            //        template.Append($"{FirstCharacterToLower(column.ColumnAPIName)}, ");
+            //    } else {
+            //        template.Append(FirstCharacterToLower(column.ColumnAPIName));
+            //    }
+            //}
+            //return template.ToString();
         }
+
+        public static String APIParameterDefinitionList(List<TableColumnDefinition> tableColumns) {
+            // Returns a csv list of parameters with their datatype - ex: int projectId, string projectName
+            return string.Join(",", tableColumns.Select(c => $"{ c.ColumnAPIDataType } { FirstCharacterToLower(c.ColumnAPIName ) }").ToList());
+        }
+
+        public static String APIParameterPropertyAssignmentList(List<TableColumnDefinition> tableColumns, bool addNewLineChar) {
+            // Returns a csv list of object properties being assigned to their incoming parameter values - ex: this.projectId = projectId, this.projectName = projectName
+            if (addNewLineChar) {
+                return string.Join(" ", tableColumns.Select(c => $"this.{ c.ColumnAPIName } = { FirstCharacterToLower(c.ColumnAPIName) }; {Environment.NewLine}").ToList());
+            } else {
+                return string.Join(" ", tableColumns.Select(c => $"this.{ c.ColumnAPIName } = { FirstCharacterToLower(c.ColumnAPIName) };").ToList());
+            }
+
+        }
+        
 
         public static String GetSQLColumnList(List<TableColumnDefinition> tableColumns) {
             // Returns list of SQL column names for use in SQL Insert statements
