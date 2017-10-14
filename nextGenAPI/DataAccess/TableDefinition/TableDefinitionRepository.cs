@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 namespace nextGenAPI.DataAccess.TableDefinition {
     internal class TableDefinitionRepository : RepositoryBase {
 
-        public List<TableDefinition> GetTableDefinition() {
+        public List<TableDefinition> GetTableDefinition(int projectIdArg) {
 
             var tables = new List<TableDefinition>();
             using (var connection = new SqlConnection(ConnectionString)) {
@@ -14,6 +14,8 @@ namespace nextGenAPI.DataAccess.TableDefinition {
 
                 var tableDefCmd = new TableDefinitionCommandFactory();
                 using (var command = tableDefCmd.GetTableDefinition(connection)) {
+
+                    command.Parameters["@projectId"].Value = projectIdArg;
 
                     using (var reader = command.ExecuteReader()) {
 

@@ -6,7 +6,7 @@ using System.Web.Http.Cors;
 namespace nextGenAPI.Controllers {
 
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-    public class ProjectController : ApiController{
+    public class ProjectController : ApiController {
 
         public IHttpActionResult Get() {
 
@@ -21,13 +21,19 @@ namespace nextGenAPI.Controllers {
         }
 
         [HttpPost]
-        public IHttpActionResult InsertProject(Project project) {
+        public IHttpActionResult SaveProjectChanges(Project project) {
 
             var repo = new ProjectRepository();
-            var insertedProject = repo.InsertProject(project);
 
-            if (insertedProject != null) {
-                return Ok(insertedProject);
+            Project savedProject;
+            if (project.ProjectId == 0) {
+                savedProject = repo.InsertProject(project);
+            } else {
+                savedProject = repo.UpdateProject(project);
+            }
+
+            if (savedProject != null) {
+                return Ok(savedProject);
             } else {
                 return BadRequest();
             }

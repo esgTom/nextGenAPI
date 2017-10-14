@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using nextGenAPI.Controllers;
 using nextGenAPI.DataAccess.Project;
 using System;
@@ -23,7 +24,7 @@ namespace nextGenAPI.Tests.Controllers {
 
             // INSERT
             var project = new Project(0, "test Project Name", "test Project Description", "API Test", DateTime.Now, "API TEST", DateTime.Now);
-            result = projectController.InsertProject(project);
+            result = projectController.SaveProjectChanges(project);
             var contentResult = result as OkNegotiatedContentResult<Project>;
 
             Assert.IsNotNull(contentResult);
@@ -34,7 +35,7 @@ namespace nextGenAPI.Tests.Controllers {
 
             // UPDATE
             project = new Project(insertedProjectId, "test Project Name UPDATE", "test Project Description UPDATE", "APIUPTest", DateTime.Now, "APIUPTEST", DateTime.Now);
-            result = projectController.UpdateProject(project);
+            result = projectController.SaveProjectChanges(project);
 
             Assert.IsNotNull(result);
             Assert.AreEqual("APIUPTEST", project.ModifiedBy);
@@ -52,4 +53,4 @@ namespace nextGenAPI.Tests.Controllers {
 
         }
     }
-} 
+}

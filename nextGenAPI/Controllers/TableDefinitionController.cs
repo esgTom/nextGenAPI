@@ -7,10 +7,10 @@ namespace nextGenAPI.Controllers {
     public class TableDefinitionController : ApiController {
 
         // GET api/<controller>
-        public IHttpActionResult Get() {
+        public IHttpActionResult Get(int projectId) {
 
             var repo = new TableDefinitionRepository();
-            var tableDefinition = repo.GetTableDefinition();
+            var tableDefinition = repo.GetTableDefinition(projectId);
 
             if (tableDefinition != null) {
                 return Ok(tableDefinition);
