@@ -16,10 +16,14 @@ namespace nextGenAPI.DataAccess.TableDefinition {
                         Modified_By,  
                         Modified_Date
                 FROM	Table_Definition
+                WHERE   project_Id = @projectId
                 ORDER BY Table_Name
             ";
 
             var cmd = new SqlCommand(Common.Helpers.CleanSQLText(queryString), connection);
+
+            cmd.Parameters.Add("@projectId", SqlDbType.Int);
+
             return cmd;
 
         }
